@@ -1,0 +1,82 @@
+{
+  "name": "tit-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "watch": "tsc --w",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' || true",
+    "tsdiagnosis": "tsc --noEmit || true",
+    "check": "npm run lint && npm run tsdiagnosis",
+    "precommit": "npm run check && npm test"
+  },
+  "bin": "./dest/bin/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/cli-spinner": "^0.2.0",
+    "@types/commander": "^2.12.2",
+    "@types/execa": "^0.8.1",
+    "@types/log4js": "^2.3.5",
+    "@types/minimist": "^1.2.0",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^9.4.5",
+    "@types/semver": "^5.5.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "chalk": "^2.3.1",
+    "cli-spinner": "^0.2.7",
+    "commander": "^2.14.1",
+    "execa": "^0.9.0",
+    "log4js": "^2.4.1",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "semver": "^5.5.0",
+    "ts-simple-ast": "^8.0.0"
+  },
+  "description": "",
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ],
+    "moduleNameMapper": {
+      "@ctrip/crn": "<rootDir>/node_modules/Flight-GeneralFunction/__mocks__/@ctrip/crn/crn.js"
+    },
+    "collectCoverageFrom": [
+      "**/src/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "**/enum.ts",
+      "**/interface.ts"
+    ],
+    "coverageReporters": [
+      "json-summary",
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./commit-config.js"
+    }
+  }
+}
