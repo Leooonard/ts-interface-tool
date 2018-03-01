@@ -4,7 +4,7 @@ import * as Command from 'commander';
 import prefixInterface from '../service/prefix';
 import camelCaseInterfaceAttribute from '../service/camelcase';
 import removeNullable from '../service/removeNullable';
-import ignoreJsDocError from '../service/jsdoc';
+import ignoreTslintError from '../service/tslintError';
 
 const version = '0.0.1';
 
@@ -41,10 +41,20 @@ async function main() {
         });
 
     Command
-        .command('ignore-jsdoc <tsFilePath>')
-        .description('忽略jsdoc错误')
+        .command('ignore-tslint-error <tsFilePath>')
+        .description('忽略tslint错误')
         .action((tsFilePath) => {
-            ignoreJsDocError(tsFilePath);
+            ignoreTslintError(tsFilePath);
+        });
+
+    Command
+        .command('all <tsFilePath>')
+        .description('对interface文件使用所有操作')
+        .action((tsFilePath) => {
+            prefixInterface(tsFilePath);
+            camelCaseInterfaceAttribute(tsFilePath, false);
+            removeNullable(tsFilePath);
+            ignoreTslintError(tsFilePath);
         });
 
     Command.parse(process.argv);
