@@ -13,7 +13,7 @@ const Command = require("commander");
 const prefix_1 = require("../service/prefix");
 const camelcase_1 = require("../service/camelcase");
 const removeNullable_1 = require("../service/removeNullable");
-const jsdoc_1 = require("../service/jsdoc");
+const tslintError_1 = require("../service/tslintError");
 const version = '0.0.1';
 main();
 function main() {
@@ -43,10 +43,19 @@ function main() {
             removeNullable_1.default(tsFilePath);
         });
         Command
-            .command('ignore-jsdoc <tsFilePath>')
-            .description('忽略jsdoc错误')
+            .command('ignore-tslint-error <tsFilePath>')
+            .description('忽略tslint错误')
             .action((tsFilePath) => {
-            jsdoc_1.default(tsFilePath);
+            tslintError_1.default(tsFilePath);
+        });
+        Command
+            .command('all <tsFilePath>')
+            .description('对interface文件使用所有操作')
+            .action((tsFilePath) => {
+            prefix_1.default(tsFilePath);
+            camelcase_1.default(tsFilePath, false);
+            removeNullable_1.default(tsFilePath);
+            tslintError_1.default(tsFilePath);
         });
         Command.parse(process.argv);
     });
